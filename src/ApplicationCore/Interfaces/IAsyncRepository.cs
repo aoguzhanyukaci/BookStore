@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IAsyncRespository<T> where T : BaseEntity
+    public interface IAsyncRepository<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(int id);
         Task<List<T>> ListAllAsync();
