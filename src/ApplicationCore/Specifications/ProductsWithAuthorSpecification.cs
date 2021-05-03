@@ -8,11 +8,24 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Specifications
 {
-    public class ProductsWithAuthorSpecification: Specification<Product>
+    public class ProductsWithAuthorSpecification : Specification<Product>
     {
         public ProductsWithAuthorSpecification()
         {
             Query.Include(x => x.Author);
+        }
+
+        public ProductsWithAuthorSpecification(int? categoryId, int? authorId) : this()
+        {
+            if (categoryId.HasValue)
+            {
+                Query.Where(x => x.CategoryId == categoryId);
+            }
+
+            if (authorId.HasValue)
+            {
+                Query.Where(x => x.AuthorId == authorId);
+            }
         }
     }
 }
