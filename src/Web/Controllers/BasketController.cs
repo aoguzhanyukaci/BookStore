@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApplicationCore.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Interfaces;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
     public class BasketController : Controller
     {
         private readonly IBasketViewModelService _basketViewModelService;
+        private readonly IBasketService _basketService;
 
-        public BasketController(IBasketViewModelService basketViewModelService)
+        public BasketController(IBasketViewModelService basketViewModelService, IBasketService basketService)
         {
             _basketViewModelService = basketViewModelService;
+            _basketService = basketService;
         }
         public IActionResult Index()
         {
@@ -21,11 +25,12 @@ namespace Web.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public Task<IActionResult> AddToBasket(int productId, int quantity)
+        public async Task<IActionResult> AddToBasket(int productId, int quantity)
         {
-            // application core projesinde BasketViewModelService : IBasketViewModelService
-            // 
-            return null;
+            var basketId = await _basketViewModelService.GetOrCreateBasketIdAsync();
+            await _basketService.AddItemToBasket(basketId, productId, quantity);
+            int basketItemsCount = await _basketService.BasketItemCount(basketId);
+            return Json(new BasketItemsCountViewModel() { BasketItemsCount = basketItemsCount });
         }
     }
 }
