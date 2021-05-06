@@ -1,17 +1,11 @@
-#Migrations
-First set src/Infrastructure as default project nin package manager console
+# Migrations
+First set src/Infrastructure as default project in Package Manager Console
 
 Add-Migration InitialApp -OutputDir Data/Migrations -Context Infrastructure.Data.AppDbContext -StartupProject Web
-
 Update-Database -Context Infrastructure.Data.AppDbContext
-
 
 Add-Migration InitialIdentity -OutputDir Identity/Migrations -Context Infrastructure.Identity.AppIdentityDbContext -StartupProject Web
 Update-Database -Context Infrastructure.Identity.AppIdentityDbContext
 
-Add-Migration OrderBasketAded -OutputDir Data/Migrations -Context Infrastructure.Data.AppDbContext -StartupProject Web
-update-database -context AppDbContext
-
-remove-migration -context AppDbContext
-
-#
+# Creating AntiForgeryToken In Views
+https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-5.0#javascript
