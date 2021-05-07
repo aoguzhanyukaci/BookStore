@@ -31,5 +31,13 @@ namespace Web.Controllers
             await _basketService.AddItemToBasket(basketId, productId, quantity);
             return Json(await _basketViewModelService.GetBasketItemsCountViewModel(basketId));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveBasketItem(int basketItemId)
+        {
+            var basketId = await _basketViewModelService.GetOrCreateBasketIdAsync();
+            await _basketService.DeleteBasketItem(basketId, basketItemId);
+            return PartialView("_BasketPartial", await _basketViewModelService.GetBasketViewModel());
+        }
     }
 }

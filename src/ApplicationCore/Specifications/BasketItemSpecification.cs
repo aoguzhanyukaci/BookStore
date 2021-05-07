@@ -18,6 +18,5 @@ namespace ApplicationCore.Specifications
         {
             Query.Where(x => x.BasketId == basketId && x.ProductId == productId);
         }
-
     }
 }
