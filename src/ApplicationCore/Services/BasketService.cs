@@ -51,5 +51,14 @@ namespace ApplicationCore.Services
             await _basketItemRepository.DeleteAsync(item);
 
         }
+
+        public async Task UpdateBasketItem(int basketId, int basketItemId, int quantity)
+        {
+            if (quantity < 1) throw new Exception("The quantity be less than 1.");
+            var spec = new MangeBasketItemSpecification(basketId, basketItemId);
+            var item = await _basketItemRepository.FirstOrDefaultAsync(spec);
+            item.Quantity = quantity;
+            await _basketItemRepository.UpdateAsync(item);
+        }
     }
 }
