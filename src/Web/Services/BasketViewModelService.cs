@@ -112,5 +112,15 @@ namespace Web.Services
                 }
             }
         }
+
+        public async Task TransferBasketsAsync(string userId)
+        {
+            var context = _httpContextAccesor.HttpContext;
+            // Transfer Baskets
+            var anonId = context.Request.Cookies[Constants.BASKET_COOKIE_NAME];
+            if (!string.IsNullOrEmpty(anonId))
+                await _basketService.TransferBasketAsync(anonId, userId);
+            context.Response.Cookies.Delete(Constants.BASKET_COOKIE_NAME);
+        }
     }
 }
