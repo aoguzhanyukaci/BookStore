@@ -1,9 +1,9 @@
 ﻿@model CheckeoutViewModel
 @{
-    ViewData["Title"] = "Checkeout";
+    ViewData["Title"] = "Checkout";
 }
 
-<h1 class="mt-5">Checkeout</h1>
+<h1 class="mt-5">Checkout</h1>
 
 <div class="row">
     <div class="col-md-4 order-md-2 mb-4">
@@ -24,48 +24,44 @@
             }
             <li class="list-group-item d-flex justify-content-between">
                 <span>Total (USD)</span>
-                <strong>@Model.TotalPrice.ToString("c2")</strong>
+                <strong>@Model.TotalPrice().ToString("c2")</strong>
             </li>
         </ul>
-
     </div>
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Billing address</h4>
         <form method="post" class="needs-validation" novalidate>
-
             <div class="mb-3">
                 <label asp-for="Street">Address</label>
-                <input asp-for="Street" type="text" class="form-control"  placeholder="1234 Main St">
+                <input asp-for="Street" type="text" class="form-control" placeholder="1234 Main St" required>
                 <span asp-validation-for="Street"></span>
             </div>
-
             <div class="row">
-                <div class="col-md-5 mb-3">
+                <div class="col-md-4 mb-3">
                     <label asp-for="Country">Country</label>
-                    <select asp-for="Country" class="custom-select d-block w-100">
+                    <select asp-for="Country" class="custom-select d-block w-100" required>
                         <option value="">Choose...</option>
                         <option>Turkey</option>
                         <option>United States</option>
                     </select>
                     <span asp-validation-for="Country"></span>
-                    <div class="invalid-feedback">
-                        Please select a valid country.
-                    </div>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <label asp-for="State">State</label>
                     <select asp-for="State" class="custom-select d-block w-100">
                         <option value="">Choose...</option>
                         <option>California</option>
                     </select>
                     <span asp-validation-for="State"></span>
-                    <div class="invalid-feedback">
-                        Please provide a valid state.
-                    </div>
                 </div>
                 <div class="col-md-3 mb-3">
+                    <label asp-for="City">City</label>
+                    <input asp-for="City" type="text" class="form-control" placeholder="" required>
+                    <span asp-validation-for="City"></span>
+                </div>
+                <div class="col-md-2 mb-3">
                     <label asp-for="ZipCode">Zip</label>
-                    <input asp-for="ZipCode" type="text" class="form-control" placeholder="">
+                    <input asp-for="ZipCode" type="text" class="form-control" placeholder="" required>
                     <span asp-validation-for="ZipCode"></span>
                 </div>
             </div>
@@ -77,30 +73,30 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="CCHolderName">Name on card</label>
-                    <input asp-for="CCHolderName" type="text" class="form-control" placeholder="" required>
+                    <input asp-for="CCHolderName" type="text" class="form-control" placeholder="">
                     <small class="text-muted">Full name as displayed on card</small>
                     <span asp-validation-for="CCHolderName"></span>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label asp-for="CCNumber">Credit card number</label>
-                    <input  asp-for="CCNumber" type="text" class="form-control" placeholder="" required>
+                    <input asp-for="CCNumber" type="text" class="form-control" placeholder="">
                     <span asp-validation-for="CCNumber"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label asp-for="CCExpiration">Expiration</label>
-                    <input asp-for="CCExpiration" type="text" class="form-control"  placeholder="" required>
+                    <input asp-for="CCExpiration" type="text" class="form-control" placeholder="">
                     <span asp-validation-for="CCExpiration"></span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label asp-for="CCCv">CVV</label>
-                    <input asp-for="CCCv" type="text" class="form-control"  placeholder="" required>
+                    <input asp-for="CCCv" type="text" class="form-control" placeholder="">
                     <span asp-validation-for="CCCv"></span>
                 </div>
             </div>
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Complate Payment</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Complete Payment</button>
         </form>
     </div>
 </div>

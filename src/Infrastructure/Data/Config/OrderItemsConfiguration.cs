@@ -16,7 +16,7 @@ namespace Infrastructure.Data.Config
 
             builder.Property(b => b.ProductName)
                 .IsRequired()
-                .HasMaxLength(18);
+                .HasMaxLength(100);
 
             builder.Property(b => b.Price)
                 .IsRequired()
