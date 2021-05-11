@@ -102,3 +102,7 @@ body {
     font-size: .8rem;
     margin-bottom: .2rem;
 }
+
+.filed-validation-error{
+    color:var(--danger);
+}
